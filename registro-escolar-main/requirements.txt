@@ -1,0 +1,8 @@
+black
+Django==4.2.9
+django-admin-list-filter-dropdown
+django-debug-toolbar
+django-smart-selects
+gunicorn
+openpyxl
+XlsxWriter

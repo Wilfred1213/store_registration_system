@@ -1,0 +1,26 @@
+# SECURITY WARNING: keep the secret key used in production secret!
+# Change the secret key in every project and deployment
+# SECRET_KEY = 'a real secret key'
+
+
+SECRET_KEY = 'VERJ35QCKDGy5HOgwkGTybq022W9wSzLx0J_xiCA_QVPxwM4cYfvtqAgfki0gBhsnRA'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'log.txt',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    },
+}

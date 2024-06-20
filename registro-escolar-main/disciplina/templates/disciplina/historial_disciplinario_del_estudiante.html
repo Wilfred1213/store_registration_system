@@ -1,0 +1,64 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+{% block title %}Historial disciplinario del estudiante{% endblock %}
+{% block content %}
+<h1>Historial disciplinario del estudiante</h1>
+<h2>{{ estudiante }}</h2>
+<ul class="object-tools">
+  <li>
+    <a href="{% url "admin:personas_estudiante_change" estudiante.id %}">&lt; Retornar a estudiante</a>
+  </li>
+</ul>
+<div class="results">
+  {% regroup historial_disciplinario_del_estudiante by periodo_escolar as faltas %}
+  {% for periodo_escolar, faltas_de_periodo in faltas %}
+  <h3 style="margin-top: 25px;">Preríodo escolar: {{ periodo_escolar }}</h3>
+  <table style="width: 100%;">
+    <thead>
+      <tr>
+        <th>
+          Editar
+        </th>
+        <th>
+          Tipo
+        </th>
+        <th>
+          Falta
+        </th>
+        <th>
+          Descripción
+        </th>
+        <th>
+          fecha
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for falta in faltas_de_periodo %}
+      <tr>
+        <td>
+          {% if falta.periodo_escolar.periodo_activo %}
+          <a class="changelink" href="{% url "admin:disciplina_faltadisciplinariaestudiantil_change" falta.id %}">
+            Editar
+          </a>
+          {% else %}
+          <a class="viewlink" href="{% url "admin:disciplina_faltadisciplinariaestudiantil_change" falta.id %}">
+            Ver
+          </a>
+          {% endif %}
+        </td>
+        <td>
+          {{ falta.falta.get_categoria_display }}
+        </td>
+        <td>
+          {{ falta.falta.descripcion }}
+        </td>
+        <td>{{ falta.descripcion }}</td>
+        <td>{{ falta.fecha }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endfor %}
+{% endblock %}
